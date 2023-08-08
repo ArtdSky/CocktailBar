@@ -1,4 +1,4 @@
-package com.example.cocktailbar.ui.theme
+package com.example.cocktailbar.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

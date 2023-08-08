@@ -1,4 +1,4 @@
-package com.example.cocktailbar.ui.theme
+package com.example.cocktailbar.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
