@@ -9,9 +9,9 @@ import androidx.room.TypeConverters
 @TypeConverters(ListConverter::class)
 data class CocktailEntity (
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     val name: String,
-    val img: ByteArray? = null,
+    val img: String? = null,
     val description: String? = null,
     val recipe: String? = null,
     val ingredients: List<String>? = null,

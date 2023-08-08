@@ -59,6 +59,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.cocktailbar.R
+import com.example.cocktailbar.domain.models.Cocktail
 import com.example.cocktailbar.domain.models.Cocktail2
 import com.example.cocktailbar.presentation.routing.Screen
 import com.example.cocktailbar.presentation.viewmodel.MainViewModel
@@ -80,17 +81,6 @@ fun AddCocktail(
     var ingredients = remember { mutableStateListOf<String>() }
     var newIngredient by remember { mutableStateOf("") }
     val showDialog = remember { mutableStateOf(false) }
-
-    Log.d(
-        "TAG", Cocktail2(
-            id = 0,
-            name = name,
-            img = imageUri.toString(),
-            description = description,
-            recipe = recipe,
-            ingredients = ingredients
-        ).toString()
-    )
 
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
@@ -341,7 +331,19 @@ fun AddCocktail(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { },
+                    onClick = {
+                        if (name.isNotEmpty() && imageUri != null && description.isNotEmpty() && recipe.isNotEmpty() && ingredients.isNotEmpty()) {
+                            vm.addCocktailToDb(
+                                Cocktail(
+                                    name = name,
+                                    img = imageUri.toString(),
+                                    description = description,
+                                    recipe = recipe,
+                                    ingredients = ingredients
+                                )
+                            )
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xff4B97FF),
                         contentColor = Color(0xffFFFFFF),
@@ -366,7 +368,7 @@ fun AddCocktail(
 
 
                 Button(
-                    onClick = { },
+                    onClick = { navController.navigate(Screen.MyCocktails.route) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                         contentColor = Color(0xff4B97FF)

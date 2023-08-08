@@ -44,7 +44,6 @@ fun NavGraph(
                 vm = vm,
                 navController = navController,
                 currentScreen = currentScreen,
-                cocktail = Cocktail(1,"test")
             )
         }
 

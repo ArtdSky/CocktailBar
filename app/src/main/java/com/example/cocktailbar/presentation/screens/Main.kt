@@ -64,46 +64,58 @@ fun MainScreen(
     val state by vm.viewState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
+    Log.d("MAIN", state.toString())
+//    val yourBitmapImage1: Bitmap? = null
+//    val itemsList: List<Cocktail> = listOf(
+//        Cocktail(
+//            id = 1,
+//            name = "Mojito",
+//            img = yourBitmapImage1,
+//            description = "Refreshing cocktail with mint and lime",
+//            recipe = "1. Muddle mint leaves and lime juice\n2. Add rum, sugar, and ice\n3. Shake well and strain into glass\n4. Top with soda water\n5. Garnish with mint sprig",
+//            ingredients = listOf("2 oz white rum", "1 oz lime juice", "2 tsp sugar", "8-10 fresh mint leaves", "soda water")
+//        ),
+//        Cocktail(
+//            id = 2,
+//            name = "Cosmopolitan",
+//            img = yourBitmapImage1,
+//            description = "Classic vodka cocktail with citrus flavors",
+//            recipe = "1. Shake all ingredients with ice\n2. Strain into a martini glass\n3. Garnish with lemon twist",
+//            ingredients = listOf("1.5 oz vodka", "1 oz cranberry juice", "0.5 oz triple sec", "0.5 oz lime juice")
+//        ),
+//        Cocktail(
+//            id = 3,
+//            name = "Mojito2",
+//            img = yourBitmapImage1,
+//            description = "Refreshing cocktail with mint and lime",
+//            recipe = "1. Muddle mint leaves and lime juice\n2. Add rum, sugar, and ice\n3. Shake well and strain into glass\n4. Top with soda water\n5. Garnish with mint sprig",
+//            ingredients = listOf("2 oz white rum", "1 oz lime juice", "2 tsp sugar", "8-10 fresh mint leaves", "soda water")
+//        ),
+//        Cocktail(
+//            id = 4,
+//            name = "Cosmopolitan2",
+//            img = yourBitmapImage1,
+//            description = "Classic vodka cocktail with citrus flavors",
+//            recipe = "1. Shake all ingredients with ice\n2. Strain into a martini glass\n3. Garnish with lemon twist",
+//            ingredients = listOf("1.5 oz vodka", "1 oz cranberry juice", "0.5 oz triple sec", "0.5 oz lime juice")
+//        )
+//    )
+
+    if(state.cocktails == null || state.cocktails!!.isEmpty()){
+        WelcomeScreen(vm = vm, navController = navController, currentScreen = currentScreen)
+    } else {
+        MyCocktails(vm = vm, navController = navController, currentScreen = currentScreen)
+    }
+
 //    WelcomeScreen(vm = vm, navController = navController, currentScreen = currentScreen)
 //    MyCocktails(vm = vm, navController = navController, currentScreen = currentScreen)
 
-    val yourBitmapImage1: Bitmap? = null
-    val itemsList: List<Cocktail> = listOf(
-        Cocktail(
-            id = 1,
-            name = "Mojito",
-            img = yourBitmapImage1,
-            description = "Refreshing cocktail with mint and lime",
-            recipe = "1. Muddle mint leaves and lime juice\n2. Add rum, sugar, and ice\n3. Shake well and strain into glass\n4. Top with soda water\n5. Garnish with mint sprig",
-            ingredients = listOf("2 oz white rum", "1 oz lime juice", "2 tsp sugar", "8-10 fresh mint leaves", "soda water")
-        ),
-        Cocktail(
-            id = 2,
-            name = "Cosmopolitan",
-            img = yourBitmapImage1,
-            description = "Classic vodka cocktail with citrus flavors",
-            recipe = "1. Shake all ingredients with ice\n2. Strain into a martini glass\n3. Garnish with lemon twist",
-            ingredients = listOf("1.5 oz vodka", "1 oz cranberry juice", "0.5 oz triple sec", "0.5 oz lime juice")
-        ),
-        Cocktail(
-            id = 3,
-            name = "Mojito2",
-            img = yourBitmapImage1,
-            description = "Refreshing cocktail with mint and lime",
-            recipe = "1. Muddle mint leaves and lime juice\n2. Add rum, sugar, and ice\n3. Shake well and strain into glass\n4. Top with soda water\n5. Garnish with mint sprig",
-            ingredients = listOf("2 oz white rum", "1 oz lime juice", "2 tsp sugar", "8-10 fresh mint leaves", "soda water")
-        ),
-        Cocktail(
-            id = 4,
-            name = "Cosmopolitan2",
-            img = yourBitmapImage1,
-            description = "Classic vodka cocktail with citrus flavors",
-            recipe = "1. Shake all ingredients with ice\n2. Strain into a martini glass\n3. Garnish with lemon twist",
-            ingredients = listOf("1.5 oz vodka", "1 oz cranberry juice", "0.5 oz triple sec", "0.5 oz lime juice")
-        )
-    )
+
 //    CocktailDetails(vm = vm, navController = navController, currentScreen = currentScreen, cocktail = itemsList[0] )
-    AddCocktail(vm = vm, navController = navController, currentScreen = currentScreen )
+//    AddCocktail(vm = vm, navController = navController, currentScreen = currentScreen )
+
+
+
 
 }
 
@@ -157,7 +169,7 @@ fun WelcomeScreen(
                         contentDescription = null
                     )
                     FloatingActionButton(
-                        onClick = { },
+                        onClick = { navController.navigate(Screen.AddCocktail.route)},
                         content = {
                             Icon(Icons.Default.Add, contentDescription = "add")
                         },

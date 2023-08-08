@@ -46,9 +46,12 @@ fun CocktailDetails(
     vm: MainViewModel,
     navController: NavHostController,
     currentScreen: Screen,
-    cocktail: Cocktail
 ) {
     val state by vm.viewState.collectAsState()
+    state.id?.let { vm.getCocktailOutDb(it) }
+    val cocktail: Cocktail = state.cocktail ?: Cocktail(
+        name = "Unknown",
+    )
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -65,21 +68,11 @@ fun CocktailDetails(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-            Box(){
-                Text(
-                    text = cocktail.name,
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
-                    ),
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-            }
         }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top ,
+            verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.6f)
@@ -132,7 +125,7 @@ fun CocktailDetails(
                         fontWeight = FontWeight.Normal,
                         lineHeight = 19.sp,
                         color = Color.Black,
-                    textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center
                     ),
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -140,22 +133,23 @@ fun CocktailDetails(
         }
 
         FloatingActionButton(
-            containerColor = Color(0xFF4B97FF) ,
-            onClick = {  },
+            containerColor = Color(0xFF4B97FF),
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
                 .padding(vertical = 16.dp, horizontal = 16.dp)
                 .clip(RoundedCornerShape(80.dp))
         ) {
-            Text(text = "Edit",
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.didactgothicregular)),
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Normal,
-                lineHeight = 31.sp,
-                color = Color.White
-            )
+            Text(
+                text = "Edit",
+                style = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.didactgothicregular)),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 31.sp,
+                    color = Color.White
+                )
             )
         }
 

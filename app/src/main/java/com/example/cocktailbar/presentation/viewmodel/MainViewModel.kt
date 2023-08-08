@@ -27,6 +27,9 @@ class MainViewModel(
     )
     val viewState = _viewState.asStateFlow()
 
+    init {
+        getAllCocktailsOutDb()
+    }
     fun addCocktailToDb(cocktail: Cocktail) {
         viewModelScope.launch {
             saveCocktail(cocktail)
@@ -34,7 +37,7 @@ class MainViewModel(
         }
     }
 
-    fun getAllCocktailOutDb() {
+    fun getAllCocktailsOutDb() {
         viewModelScope.launch {
             val cocktails = getAllCocktails()
             _viewState.update { currentState ->
@@ -46,17 +49,27 @@ class MainViewModel(
         }
     }
 
-    fun getCocktailOutDb() {
+    fun getCocktailOutDb(id : Int) {
         viewModelScope.launch {
-            val cocktail = getAllCocktails()
+            val cocktail = getCocktail(id)
             _viewState.update { currentState ->
                 currentState.copy(
-                    cocktails = cocktail,
+                    cocktail = cocktail,
                 )
             }
             Log.d("VM-getAllCocktailOutDb", cocktail.toString())
         }
     }
 
+    fun setCocktailId(id : Int) {
+        viewModelScope.launch {
+            _viewState.update { currentState ->
+                currentState.copy(
+                    id = id,
+                )
+            }
+            Log.d("VM-getAllCocktailOutDb", id.toString())
+        }
+    }
 
 }

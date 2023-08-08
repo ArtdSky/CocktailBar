@@ -14,7 +14,7 @@ class CocktailUtils {
             return Cocktail(
                 id = cocktailEntity.id,
                 name = cocktailEntity.name,
-                img = cocktailEntity.img?.let { byteArrayToBitmap(it) },
+                img = cocktailEntity.img,
                 description = cocktailEntity.description,
                 recipe = cocktailEntity.recipe,
                 ingredients = cocktailEntity.ingredients
@@ -25,7 +25,7 @@ class CocktailUtils {
             return CocktailEntity(
                 id = cocktail.id,
                 name = cocktail.name,
-                img = cocktail.img?.let { bitmapToByteArray(it) },
+                img = cocktail.img,
                 description = cocktail.description,
                 recipe = cocktail.recipe,
                 ingredients = cocktail.ingredients
