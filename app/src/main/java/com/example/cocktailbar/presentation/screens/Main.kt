@@ -104,6 +104,7 @@ fun MainScreen(
     )
 //    CocktailDetails(vm = vm, navController = navController, currentScreen = currentScreen, cocktail = itemsList[0] )
     AddCocktail(vm = vm, navController = navController, currentScreen = currentScreen )
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
