@@ -10,7 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.cocktailbar.presentation.routing.NavState
 import com.example.cocktailbar.presentation.ui.theme.CocktailBarTheme
+import com.example.cocktailbar.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,29 +21,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             CocktailBarTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                MainActivityScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun MainActivityScreen() {
+    val myViewModel: MainViewModel = koinViewModel()
+    NavState(
+        vm = myViewModel
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CocktailBarTheme {
-        Greeting("Android")
-    }
-}
