@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.example.cocktailbar'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.cocktailbar"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -48,6 +48,8 @@ android {
 }
 
 dependencies {
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.2.2")
     //Room
     def room_version = "2.5.2"
     kapt "androidx.room:room-compiler:$room_version"

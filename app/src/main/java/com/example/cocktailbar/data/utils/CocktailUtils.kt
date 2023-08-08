@@ -21,7 +21,6 @@ class CocktailUtils {
             )
         }
 
-
         fun mapCocktailToEntity(cocktail: Cocktail): CocktailEntity {
             return CocktailEntity(
                 id = cocktail.id,
@@ -44,5 +43,4 @@ class CocktailUtils {
         }
 
     }
-
 }
