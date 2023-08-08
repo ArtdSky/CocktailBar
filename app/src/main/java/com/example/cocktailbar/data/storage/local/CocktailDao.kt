@@ -1,10 +1,12 @@
 package com.example.cocktailbar.data.storage.local
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.cocktailbar.data.storage.local.models.CocktailEntity
 
+@Dao
 interface CocktailDao {
 
     @Query("SELECT * FROM cocktails_table")
