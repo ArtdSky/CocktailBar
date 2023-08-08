@@ -8,7 +8,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,14 +48,14 @@ import java.util.*
 fun MyCocktails(
     vm: MainViewModel,
     navController: NavHostController,
-    currentScreen: Screen
 ) {
     val TAG = "MyCocktails"
     val state by vm.viewState.collectAsState()
     Log.d(TAG, state.toString())
-
+    vm.getAllCocktailsOutDb()
     val itemsList: List<Cocktail> = state.cocktails ?: emptyList()
     Scaffold(
+
         content = { paddingValues ->
 
             Column(
@@ -78,10 +80,10 @@ fun MyCocktails(
                 )
 
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(2)
+                    columns = GridCells.Fixed(2),
+
                 ) {
                     items(itemsList.size) { item ->
-
                         Box(
                             modifier = Modifier
                                 .size(350.dp)
@@ -89,11 +91,9 @@ fun MyCocktails(
                                 .clip(RoundedCornerShape(15))
                         ) {
                             itemsList[item].img?.let { img ->
-                                val test =
-                                    "content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F358/ORIGINAL/NONE/image%2Fjpeg/758477784"
-                                val uriImg = Uri.parse(test)
+                                val uriImg = Uri.parse(img)
                                 Image(
-                                    painter = painterResource(R.drawable.crayton),
+                                    painter = rememberAsyncImagePainter(model = uriImg),
                                     contentDescription = "cocktail",
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier
@@ -118,7 +118,7 @@ fun MyCocktails(
                                     lineHeight = 23.sp,
                                     letterSpacing = 0.sp,
                                     textAlign = TextAlign.Right,
-                                    color = Color.White
+                                    color = Color.Black
                                 ),
                             )
                         }
@@ -128,7 +128,10 @@ fun MyCocktails(
                 }
 
                 FloatingActionButton(
-                    onClick = { navController.navigate(Screen.AddCocktail.route) },
+                    onClick = {
+                        vm.clearCocktailId()
+                        navController.navigate(Screen.AddCocktail.route)
+                    },
                     content = {
                         Icon(Icons.Default.Add, contentDescription = "add")
                     },

@@ -17,6 +17,28 @@ class RepositoryImpl(
         }
     }
 
+    override suspend fun deleteCocktailById(id: Int) {
+        return cocktailsLocalStorage.deleteCocktailById(id)
+    }
+
+    override suspend fun updateCocktailById(
+        id: Int,
+        name: String,
+        img: String?,
+        description: String?,
+        recipe: String?,
+        ingredients: List<String>?
+    ) {
+        return cocktailsLocalStorage.updateCocktailById(
+            id = id,
+            name = name,
+            img = img,
+            description = description,
+            recipe = recipe,
+            ingredients = ingredients
+        )
+    }
+
     override suspend fun getCocktail(id: Int): Cocktail {
         val data = cocktailsLocalStorage.getCocktailById(id)
         return CocktailUtils.mapEntityToCocktail(data)

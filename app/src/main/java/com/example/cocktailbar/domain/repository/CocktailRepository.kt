@@ -10,4 +10,15 @@ interface CocktailRepository {
 
     suspend fun saveCocktail(cocktail: Cocktail): Boolean
 
+    suspend fun deleteCocktailById(id: Int)
+
+    suspend fun updateCocktailById(
+        id: Int,
+        name: String,
+        img: String?,
+        description: String?,
+        recipe: String?,
+        ingredients: List<String>?
+    )
+
 }

@@ -9,4 +9,15 @@ interface CocktailsLocalStorage {
     suspend fun saveCocktail(cocktail: CocktailEntity)
 
     suspend fun getCocktailById(id: Int) : CocktailEntity
+
+    suspend fun deleteCocktailById(id: Int)
+
+    suspend fun updateCocktailById(
+        id: Int,
+        name: String,
+        img: String?,
+        description: String?,
+        recipe: String?,
+        ingredients: List<String>?
+    )
 }

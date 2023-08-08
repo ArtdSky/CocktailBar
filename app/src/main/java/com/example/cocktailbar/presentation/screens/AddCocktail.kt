@@ -11,6 +11,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -69,16 +72,26 @@ import com.example.cocktailbar.presentation.viewmodel.MainViewModel
 fun AddCocktail(
     vm: MainViewModel,
     navController: NavHostController,
-    currentScreen: Screen
 ) {
+    val TAG = "AddCocktail"
     val state by vm.viewState.collectAsState()
+    Log.d(TAG, state.toString())
 
-    var name by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var recipe by remember { mutableStateOf("") }
-    var imageUri by remember { mutableStateOf<Uri?>(null) }
+    state.cocktail?.let {cocktail ->
+        cocktail.id?.let { vm.getCocktailOutDb(it) }
+    }
 
-    var ingredients = remember { mutableStateListOf<String>() }
+
+    var name by remember { mutableStateOf(state.cocktail?.name ?: "") }
+    var description by remember { mutableStateOf(state.cocktail?.description ?: "") }
+    var recipe by remember { mutableStateOf(state.cocktail?.recipe ?: "") }
+    var imageUri by remember { mutableStateOf<Uri?>( null) }
+    var ingredients = remember { mutableStateListOf<String>( ) }
+    state.cocktail?.ingredients?.let { ingredient ->
+        ingredients.clear()
+        ingredients.addAll(ingredient)
+    }
+
     var newIngredient by remember { mutableStateOf("") }
     val showDialog = remember { mutableStateOf(false) }
 
@@ -101,6 +114,7 @@ fun AddCocktail(
     Surface(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
@@ -332,7 +346,7 @@ fun AddCocktail(
 
                 Button(
                     onClick = {
-                        if (name.isNotEmpty() && imageUri != null && description.isNotEmpty() && recipe.isNotEmpty() && ingredients.isNotEmpty()) {
+                        if (name.isNotEmpty() && imageUri != null  && ingredients.isNotEmpty()) {
                             vm.addCocktailToDb(
                                 Cocktail(
                                     name = name,
@@ -342,6 +356,7 @@ fun AddCocktail(
                                     ingredients = ingredients
                                 )
                             )
+                            navController.navigate(Screen.MyCocktails.route)
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -392,6 +407,7 @@ fun AddCocktail(
 
                         )
                 }
+                Spacer(modifier = Modifier.height(24.dp))
 
 
             }

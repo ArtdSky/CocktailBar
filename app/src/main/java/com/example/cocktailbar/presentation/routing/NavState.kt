@@ -22,7 +22,6 @@ fun NavState(
     NavGraph(
         vm = vm,
         navController = navController,
-        currentScreen = currentScreen,
     )
 
 }

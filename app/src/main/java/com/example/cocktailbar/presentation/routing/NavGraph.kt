@@ -16,7 +16,6 @@ import com.example.cocktailbar.presentation.screens.MyCocktails
 fun NavGraph(
     vm: MainViewModel,
     navController: NavHostController,
-    currentScreen: Screen
 ) {
 
     NavHost(
@@ -27,7 +26,6 @@ fun NavGraph(
             MainScreen(
                 vm = vm,
                 navController = navController,
-                currentScreen = currentScreen
             )
         }
 
@@ -35,7 +33,6 @@ fun NavGraph(
             MyCocktails(
                 vm = vm,
                 navController = navController,
-                currentScreen = currentScreen
             )
         }
 
@@ -43,7 +40,6 @@ fun NavGraph(
             CocktailDetails(
                 vm = vm,
                 navController = navController,
-                currentScreen = currentScreen,
             )
         }
 
@@ -53,7 +49,6 @@ fun NavGraph(
             AddCocktail(
                 vm = vm,
                 navController = navController,
-                currentScreen = currentScreen
             )
         }
     }
