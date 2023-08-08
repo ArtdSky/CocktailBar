@@ -1,22 +1,22 @@
 package com.example.cocktailbar.data.storage
 
-import com.example.cocktailbar.data.storage.local.AppRepository
+import com.example.cocktailbar.data.storage.local.DatabaseRepository
 import com.example.cocktailbar.data.storage.local.models.CocktailEntity
 
 
 class ApiCocktailsStorage(
-    private val appRepository: AppRepository
+    private val databaseRepository: DatabaseRepository
 ) : CocktailsLocalStorage {
 
     override suspend fun getAllCocktails(): List<CocktailEntity> {
-        return appRepository.getAllCocktails()
+        return databaseRepository.getAllCocktails()
     }
 
     override suspend fun saveCocktail(cocktail: CocktailEntity) {
-        return appRepository.saveCocktail(cocktail)
+        return databaseRepository.saveCocktail(cocktail)
     }
 
     override suspend fun getCocktailById(id: Int) : CocktailEntity {
-        return appRepository.getCocktail(id)
+        return databaseRepository.getCocktail(id)
     }
 }

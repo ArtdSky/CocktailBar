@@ -2,7 +2,7 @@ package com.example.cocktailbar.data.storage.local
 
 import com.example.cocktailbar.data.storage.local.models.CocktailEntity
 
-class AppRepository(
+class DatabaseRepository(
     private val cocktailDao: CocktailDao
 ) {
 
