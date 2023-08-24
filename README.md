@@ -1,6 +1,6 @@
 # CocktailBar
 
-**Приложение выполнено в рамках одного дня на "Surf Summer Study Jam 2023" компании [Surf](https://surf.ru)**
+**Приложение выполнено в рамках  "Surf Summer Study Jam 2023" компании [Surf](https://surf.ru)**
 
 ## Что это за приложение?
 
